@@ -1,0 +1,17 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "This repository is the implementation of assignment https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js --"
+  },
+  "keywords": ["nodejs"],
+  "author": "Egor Shirobokov",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/egorka13/file-manager.git"
+  }
+}
