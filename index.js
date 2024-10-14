@@ -34,12 +34,39 @@ function printCurrentDir() {
 
 function listFiles() {
   readdir(currentDir, (err, files) => {
-    if (err) {
-      console.error('Operation failed');
-    } else {
-      console.log(files.join('\n'));
-    }
-    printCurrentDir();
+      if (err) {
+          console.error('Operation failed');
+          return;
+      }
+
+      const fileDetails = [];
+
+      let pending = files.length;
+      if (!pending) {
+          console.table(fileDetails);
+          printCurrentDir();
+          return;
+      }
+
+      files.forEach(file => {
+          const fullPath = resolve(currentDir, file);
+          stat(fullPath, (err, stats) => {
+              if (err) {
+                  console.error('Operation failed');
+                  return;
+              }
+
+              const type = stats.isDirectory() ? 'directory' : 'file';
+              fileDetails.push({ 'Name': file, 'Type': type });
+
+              if (!--pending) {
+                  fileDetails.sort((a, b) => a.Type.localeCompare(b.Type));
+
+                  console.table(fileDetails);
+                  printCurrentDir();
+              }
+          });
+      });
   });
 }
 
